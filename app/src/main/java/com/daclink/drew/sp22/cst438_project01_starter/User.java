@@ -9,9 +9,9 @@ public class User {
     private String firstName;
     private String lastName;
     private String location;
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     @NonNull
-    private Integer uid;
+    private String username;
 
     public String getFirstName() {
         return firstName;
@@ -38,11 +38,11 @@ public class User {
     }
 
     @NonNull
-    public Integer getUid() {
-        return uid;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUid(@NonNull Integer uid) {
-        this.uid = uid;
+    public void setUsername(@NonNull String username) {
+        this.username = username;
     }
 }
