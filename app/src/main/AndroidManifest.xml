@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CST438_Project01_Starter">
         <activity
-            android:name=".LoginUpActivity"
+            android:name=".LoginActivity"
             android:exported="false" />
         <activity
             android:name=".SignUpActivity"
