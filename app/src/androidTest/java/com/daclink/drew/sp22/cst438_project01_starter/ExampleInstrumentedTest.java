@@ -32,6 +32,7 @@ public class ExampleInstrumentedTest {
         User user = new User("John", "Smith", "JohnA", "Smith");
 
         try {
+            // User might already exist in database
             testDb.deleteUser(testDb.getUser(user.getUsername()));
         } catch (Exception e) { }
 

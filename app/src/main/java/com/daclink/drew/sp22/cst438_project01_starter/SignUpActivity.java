@@ -2,7 +2,10 @@ package com.daclink.drew.sp22.cst438_project01_starter;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
 
 
 import com.daclink.drew.sp22.cst438_project01_starter.databinding.ActivitySignupBinding;
@@ -10,11 +13,36 @@ import com.daclink.drew.sp22.cst438_project01_starter.databinding.ActivitySignup
 
 public class SignUpActivity extends AppCompatActivity {
     private ActivitySignupBinding binding;
+    AppDatabase AppDb;
+    UserDAO userDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivitySignupBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        AppDb = AppDatabase.getInstance(this);
+        userDAO = AppDb.getUserDao();
+
+        binding.button.setOnClickListener(v1 -> saveUser(v1));
+    }
+
+    public void saveUser(View v) {
+        String firstName = binding.firstName.getText().toString();
+        String lastName = binding.lastName.getText().toString();
+        String username = binding.username.getText().toString();
+        String password = binding.password.getText().toString();
+
+        if (username.length() == 0 || password.length() == 0) {
+            Toast.makeText(this, R.string.sign_up_length_error, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        User user = new User(firstName, lastName, username, password);
+        userDAO.insertUser(user);
+
+        // Return to main activity
+        startActivity(new Intent(this, MainActivity.class));
     }
 }
