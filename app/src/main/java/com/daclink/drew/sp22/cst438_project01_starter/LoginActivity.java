@@ -2,6 +2,7 @@ package com.daclink.drew.sp22.cst438_project01_starter;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -41,8 +42,9 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         if (user.getPassword().equals(input_password)) {
-            // go to next activity
-            Toast.makeText(this, "Correct password!", Toast.LENGTH_SHORT).show();
+            // go to home activity
+            Intent intent = new Intent(this, HomeActivity.class);
+            startActivity(intent);
         } else {
             Toast.makeText(this, R.string.invalid_password_error, Toast.LENGTH_SHORT).show();
         }
