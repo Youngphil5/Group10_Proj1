@@ -2,9 +2,12 @@ package com.daclink.drew.sp22.cst438_project01_starter;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "User")
+import java.util.Objects;
+
+@Entity(tableName = "User", indices = {@Index(value = {"username"}, unique = true)})
 public class User {
     private String firstName;
     private String lastName;
@@ -14,6 +17,13 @@ public class User {
     @PrimaryKey(autoGenerate = true)
     @NonNull
     private Integer uid;
+
+    public User(String firstName, String lastName, String username, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -50,6 +60,19 @@ public class User {
     public String getPassword() { return password; }
 
     public void setPassword(String password) { this.password = password; }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(location, user.location) && username.equals(user.username) && password.equals(user.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName, location, username, password);
+    }
 
     @NonNull
     public Integer getUid() {
