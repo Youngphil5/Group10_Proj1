@@ -13,4 +13,5 @@
     <string name="user_not_found_error">That user does not exist!</string>
     <string name="invalid_password_error">Incorrect password!</string>
     <string name="user_already_exists_error">That user already exists!</string>
+    <string name="loading" />
 </resources>
