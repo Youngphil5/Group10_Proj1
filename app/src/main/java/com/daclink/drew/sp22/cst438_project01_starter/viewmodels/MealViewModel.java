@@ -22,6 +22,10 @@ public class MealViewModel extends AndroidViewModel {
         mealResponseLiveData = mealRepository.getMealResponseLiveData();
     }
 
+    public void searchMeals(String keyword) {
+        mealRepository.searchMeals(keyword);
+    }
+
     public LiveData<MealResponse> getMealResponseLiveData() {
         return mealResponseLiveData;
     }

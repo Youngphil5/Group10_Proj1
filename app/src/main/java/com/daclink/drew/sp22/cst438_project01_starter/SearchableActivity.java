@@ -1,4 +1,77 @@
 package com.daclink.drew.sp22.cst438_project01_starter;
 
-public class SearchableActivity extends android.app.Activity{
+import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.daclink.drew.sp22.cst438_project01_starter.models.MealResponse;
+import com.daclink.drew.sp22.cst438_project01_starter.viewmodels.MealViewModel;
+import com.google.android.material.textfield.TextInputEditText;
+
+public class SearchableActivity extends android.app.Activity implements LifecycleOwner {
+    private MealViewModel viewModel;
+    private MealSearchResultsAdapter adapter;
+
+    private TextInputEditText keywordEditText;
+    private Button searchButton;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
+        super.onCreate(savedInstanceState, persistentState);
+
+        adapter = new MealSearchResultsAdapter();
+
+        //note here for error problem
+        viewModel.init();
+        viewModel.getMealResponseLiveData().observe(this, new Observer<MealResponse>() {
+            @Override
+            public void onChanged(MealResponse mealResponse) {
+                if (mealResponse != null) {
+                    adapter.setResults(mealResponse.getMeals());
+                }
+            }
+        });
+    }
+
+    @Nullable
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_search, container, false);
+
+        RecyclerView recyclerView = view.findViewById(R.id.mealResults);
+        recyclerView.setAdapter(adapter);
+
+        keywordEditText = view.findViewById(R.id.search_view);
+
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                performSearch();
+            }
+        });
+        return view;
+    }
+
+    public void performSearch() {
+        String keyword = keywordEditText.getEditableText().toString();
+
+        viewModel.searchMeals(keyword);
+    }
+
+    @NonNull
+    @Override
+    public Lifecycle getLifecycle() {
+        return null;
+    }
 }
