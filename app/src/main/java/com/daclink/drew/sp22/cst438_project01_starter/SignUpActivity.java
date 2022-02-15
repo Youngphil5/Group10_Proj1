@@ -25,6 +25,15 @@ public class SignUpActivity extends AppCompatActivity {
         AppDb = AppDatabase.getInstance(this);
         userDAO = AppDb.getUserDao();
 
+        if(userDAO.getUser("admin") == null){// means there is no admin user
+           //create admin user
+            User admin = new User("admin",
+                    "admin", "admin", "admin");
+            admin.setAdmin(true);
+
+            userDAO.insertUser(admin);
+        }
+
         binding.button.setOnClickListener(v1 -> saveUser(v1));
     }
 
@@ -50,4 +59,5 @@ public class SignUpActivity extends AppCompatActivity {
         // Return to main activity
         startActivity(new Intent(this, MainActivity.class));
     }
+
 }
