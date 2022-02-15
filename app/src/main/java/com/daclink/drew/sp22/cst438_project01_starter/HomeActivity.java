@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.daclink.drew.sp22.cst438_project01_starter.databinding.ActivityHomeBinding;
 
@@ -21,7 +22,8 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void startSearch(View v) {
-        Intent intent = new Intent(this, SearchableActivity.class);
-        startActivity(intent);
+        Toast.makeText(this, "Go to search activity", Toast.LENGTH_SHORT).show();
+//        Intent intent = new Intent(this, SearchableActivity.class);
+//        startActivity(intent);
     }
 }
