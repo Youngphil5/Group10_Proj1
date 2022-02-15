@@ -42,9 +42,16 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         if (user.getPassword().equals(input_password)) {
-            // go to home activity
-            Intent intent = new Intent(this, HomeActivity.class);
-            startActivity(intent);
+
+            if(user.getIsAdmin() == true){ // go to Admin activity
+                Intent intent = new Intent(this, AdminActivity.class);
+                startActivity(intent);
+            }
+            else{// go to home activity
+                Intent intent = new Intent(this, HomeActivity.class);
+                startActivity(intent);
+            }
+
         } else {
             Toast.makeText(this, R.string.invalid_password_error, Toast.LENGTH_SHORT).show();
         }
