@@ -56,23 +56,24 @@ public class SearchableFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
 
-        SearchView searchView = view.findViewById(R.id.search_view);
+        searchView = view.findViewById(R.id.search_view);
+        searchButton = view.findViewById(R.id.fragment_searchable_search);
 
 // following lines dont work?
 //        searchEditText = view.findViewById(R.id.search_view);
 //
-//        searchButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                performSearch();
-//            }
-//        });
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                performSearch();
+            }
+        });
 
         return view;
     }
 
     public void performSearch() {
-        String keyword = searchEditText.getEditableText().toString();
+        String keyword = searchView.getQuery().toString();
 
         viewModel.searchMeals(keyword);
     }

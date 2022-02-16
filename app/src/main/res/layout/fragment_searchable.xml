@@ -11,6 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:queryHint="Looking for something to eat?" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search"
+        android:id="@+id/fragment_searchable_search" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
