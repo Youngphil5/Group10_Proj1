@@ -33,6 +33,15 @@ public class AdminActivity extends AppCompatActivity {
         binding = ActivityAdminBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        if(userDAO.getUser("admin") == null){// means there is no admin user
+            //create admin user
+            User admin = new User("admin",
+                    "admin", "admin", "admin");
+            admin.setAdmin(true);
+
+            userDAO.insertUser(admin);
+        }
+
         AppDb = AppDatabase.getInstance(this);
         userDAO = AppDb.getUserDao();
 
