@@ -18,11 +18,10 @@ public class HomeActivity extends AppCompatActivity {
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.searchButton.setOnClickListener(v1 -> startSearch(v1));
+        binding.searchButton.setOnClickListener(v1 -> startSearchActivity(v1));
     }
 
-    public void startSearch(View v) {
-        //Toast.makeText(this, "Go to search activity", Toast.LENGTH_SHORT).show();
+    public void startSearchActivity(View v) {
         Intent intent = new Intent(this, SearchableActivity.class);
         startActivity(intent);
     }

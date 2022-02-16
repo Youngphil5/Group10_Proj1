@@ -30,22 +30,25 @@ public class LoginActivity extends AppCompatActivity {
         String input_username = binding.lUsername.getText().toString();
         String input_password = binding.lPassword.getText().toString();
 
+        // password or username is empty
         if (input_username.length() == 0 || input_password.length() == 0) {
             Toast.makeText(this, R.string.input_length_error, Toast.LENGTH_SHORT).show();
             return;
         }
 
+        // user does not exist
         User user = userDAO.getUser(input_username);
         if (user == null) {
             Toast.makeText(this, R.string.user_not_found_error, Toast.LENGTH_SHORT).show();
             return;
         }
 
+        // password is correct
         if (user.getPassword().equals(input_password)) {
-            // go to home activity
             Intent intent = new Intent(this, HomeActivity.class);
             startActivity(intent);
         } else {
+            // incorrect password
             Toast.makeText(this, R.string.invalid_password_error, Toast.LENGTH_SHORT).show();
         }
     }

@@ -35,9 +35,10 @@ public class SearchableFragment extends Fragment {
 
         adapter = new MealSearchResultsAdapter();
 
-        //note here for error problem
         viewModel = ViewModelProviders.of(this).get(MealViewModel.class);
         viewModel.init();
+
+        // automatically update data on screen
         viewModel.getMealResponseLiveData().observe(this, new Observer<MealResponse>() {
             @Override
             public void onChanged(MealResponse mealResponse) {
@@ -56,12 +57,9 @@ public class SearchableFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
 
-        searchView = view.findViewById(R.id.search_view);
+        searchView = view.findViewById(R.id.search_view);   // search view widget
         searchButton = view.findViewById(R.id.fragment_searchable_search);
 
-// following lines dont work?
-//        searchEditText = view.findViewById(R.id.search_view);
-//
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,7 +72,7 @@ public class SearchableFragment extends Fragment {
 
     public void performSearch() {
         String keyword = searchView.getQuery().toString();
-
+        // error caused here
         viewModel.searchMeals(keyword);
     }
 }
