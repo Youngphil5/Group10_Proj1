@@ -7,8 +7,8 @@
     tools:context=".SearchableActivity">
 
     <fragment
-        android:id="@+id/activity_main_navhostfragment"
-        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:id="@+id/activity_searchable_navhostfragment"
+        class ="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:defaultNavHost="true"

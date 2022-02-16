@@ -1,6 +1,9 @@
 package com.daclink.drew.sp22.cst438_project01_starter;
 
+import static android.content.ContentValues.TAG;
+
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.daclink.drew.sp22.cst438_project01_starter.models.MealResponse;
@@ -22,7 +26,7 @@ public class SearchableFragment extends Fragment {
     private MealViewModel viewModel;
     private MealSearchResultsAdapter adapter;
 
-    private TextInputEditText keywordEditText;
+    private TextInputEditText searchEditText;
     private Button searchButton;
 
     @Override
@@ -46,31 +50,33 @@ public class SearchableFragment extends Fragment {
 
     @Nullable
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_searchbak, container, false);
+        View view;
+        try {
+            view = inflater.inflate(R.layout.fragment_searchable, container, false);
+        } catch (Exception e) {
+            Log.e(TAG, "onCreateView", e);
+            throw e;
+        }
 
         RecyclerView recyclerView = view.findViewById(R.id.mealResults);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
+// following lines dont work?
+//        searchEditText = view.findViewById(R.id.search_view);
+//
+//        searchButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                performSearch();
+//            }
+//        });
 
-        keywordEditText = view.findViewById(R.id.search_view);
-
-        searchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                performSearch();
-            }
-        });
         return view;
     }
 
     public void performSearch() {
-        String keyword = keywordEditText.getEditableText().toString();
+        String keyword = searchEditText.getEditableText().toString();
 
         viewModel.searchMeals(keyword);
-    }
-
-    @NonNull
-    @Override
-    public Lifecycle getLifecycle() {
-        return null;
     }
 }
