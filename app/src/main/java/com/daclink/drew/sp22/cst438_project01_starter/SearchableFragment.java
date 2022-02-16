@@ -3,7 +3,6 @@ package com.daclink.drew.sp22.cst438_project01_starter;
 import static android.content.ContentValues.TAG;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +10,8 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -27,6 +26,7 @@ public class SearchableFragment extends Fragment {
     private MealSearchResultsAdapter adapter;
 
     private TextInputEditText searchEditText;
+    private SearchView searchView;
     private Button searchButton;
 
     @Override
@@ -50,17 +50,14 @@ public class SearchableFragment extends Fragment {
 
     @Nullable
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view;
-        try {
-            view = inflater.inflate(R.layout.fragment_searchable, container, false);
-        } catch (Exception e) {
-            Log.e(TAG, "onCreateView", e);
-            throw e;
-        }
+        View view = inflater.inflate(R.layout.fragment_searchable, container, false);
 
         RecyclerView recyclerView = view.findViewById(R.id.mealResults);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
+
+        SearchView searchView = view.findViewById(R.id.search_view);
+
 // following lines dont work?
 //        searchEditText = view.findViewById(R.id.search_view);
 //
