@@ -22,8 +22,8 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void startSearch(View v) {
-        Toast.makeText(this, "Go to search activity", Toast.LENGTH_SHORT).show();
-//        Intent intent = new Intent(this, SearchableActivity.class);
-//        startActivity(intent);
+        //Toast.makeText(this, "Go to search activity", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, SearchableActivity.class);
+        startActivity(intent);
     }
 }

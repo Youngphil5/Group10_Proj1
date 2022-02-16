@@ -21,7 +21,7 @@ public class MealSearchResultsAdapter extends RecyclerView.Adapter<MealSearchRes
     @NonNull
     @Override
     public MealSearchResultsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_search, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_searchbak, parent, false);
         return new MealSearchResultsHolder(itemView);
     }
 
