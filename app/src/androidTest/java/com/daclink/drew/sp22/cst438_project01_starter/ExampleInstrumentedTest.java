@@ -1,7 +1,9 @@
 package com.daclink.drew.sp22.cst438_project01_starter;
 
 import android.content.Context;
+import android.util.Log;
 
+import androidx.room.Room;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
@@ -21,6 +23,34 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+
+        UserDAO testDb = Room.databaseBuilder(appContext, AppDatabase.class, "app_db")
+                .allowMainThreadQueries()
+                .build()
+                .getUserDao();
+
+        User user = new User("John", "Smith", "JohnA", "Smith");
+
+        try {
+            // User might already exist in database
+            testDb.deleteUser(testDb.getUser(user.getUsername()));
+        } catch (Exception e) { }
+
+        testDb.insertUser(user);
+        user = testDb.getUser(user.getUsername());
+
+        User user2 = testDb.getUser(user.getUsername());
+
+        assertEquals(user, user2);
+
+        user2.setFirstName("Bill");
+
+        testDb.updateUser(user2);
+
+        User user3 = testDb.getUser(user.getUsername());
+
+        assertNotEquals(user, user3);
+        assertEquals(user2,user3);
         assertEquals("com.daclink.drew.sp22.cst438_project01_starter", appContext.getPackageName());
     }
 }

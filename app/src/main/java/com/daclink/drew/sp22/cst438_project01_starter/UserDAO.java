@@ -19,6 +19,6 @@ public interface UserDAO {
     @Delete
     public void deleteUser(User user);
 
-    @Query("SELECT * FROM User WHERE uid = :uid")
-    public User getUser(int uid);
+    @Query("SELECT * FROM User WHERE username = :username")
+    public User getUser(String username);
 }
