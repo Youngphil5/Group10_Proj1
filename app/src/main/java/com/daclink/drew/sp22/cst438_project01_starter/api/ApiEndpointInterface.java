@@ -10,7 +10,7 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ApiEndpointInterface {
-    @GET("/api/json/v1/1/search.php?s={strMeal}")
+    @GET("/api/json/v1/1/search.php")
     Call<MealResponse> searchMeal(
             @Query("s") String query
             );

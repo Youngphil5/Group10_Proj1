@@ -21,7 +21,7 @@ public class MealSearchResultsAdapter extends RecyclerView.Adapter<MealSearchRes
     @NonNull
     @Override
     public MealSearchResultsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_searchbak, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.food_item, parent, false);
         return new MealSearchResultsHolder(itemView);
     }
 
@@ -49,8 +49,7 @@ public class MealSearchResultsAdapter extends RecyclerView.Adapter<MealSearchRes
 
         public MealSearchResultsHolder(@NonNull View itemView) {
             super(itemView);
-
-            mealTextView = itemView.findViewById(R.id.search_view);
+            mealTextView = itemView.findViewById(R.id.meal_item_title);
         }
     }
 }
