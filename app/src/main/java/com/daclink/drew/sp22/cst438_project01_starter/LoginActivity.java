@@ -3,6 +3,7 @@ package com.daclink.drew.sp22.cst438_project01_starter;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -13,9 +14,15 @@ public class LoginActivity extends AppCompatActivity {
     private ActivityLoginBinding binding;
     AppDatabase AppDb;
     UserDAO userDAO;
+    SharedPreferences preferences;
+    SharedPreferences.Editor editPrefrences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        preferences = getApplicationContext().
+                getSharedPreferences("lastLoginInfo",
+                        MODE_PRIVATE);
+        editPrefrences = preferences.edit();
         super.onCreate(savedInstanceState);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -42,6 +49,8 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         if (user.getPassword().equals(input_password)) {
+            editPrefrences.putString("username",user.getUsername());
+            editPrefrences.apply();
 
             if(user.getIsAdmin() == true){ // go to Admin activity
                 Intent intent = new Intent(this, AdminActivity.class);
