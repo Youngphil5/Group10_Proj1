@@ -27,6 +27,10 @@ public class Meal {
     @Expose
     private String strTags;
 
+    @SerializedName("strMealThumb")
+    @Expose
+    private String strMealThumb;
+
     public String getIdMeal() {
         return idMeal;
     }
@@ -45,6 +49,10 @@ public class Meal {
 
     public String getStrTags() {
         return strTags;
+    }
+
+    public String getStrMealThumb() {
+        return strMealThumb;
     }
 }
 
