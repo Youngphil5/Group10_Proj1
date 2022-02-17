@@ -43,11 +43,13 @@ public class SignUpActivity extends AppCompatActivity {
         String username = binding.username.getText().toString();
         String password = binding.password.getText().toString();
 
+        // username or password is empty
         if (username.length() == 0 || password.length() == 0) {
             Toast.makeText(this, R.string.input_length_error, Toast.LENGTH_SHORT).show();
             return;
         }
 
+        // username is already taken
         if (userDAO.getUser(username) != null) {
             Toast.makeText(this, R.string.user_already_exists_error, Toast.LENGTH_SHORT).show();
             return;
