@@ -47,7 +47,12 @@ public class MealSearchResultsAdapter extends RecyclerView.Adapter<MealSearchRes
 
     @Override
     public int getItemCount() {
-        return results.size();
+        if(results != null){
+            return results.size();
+        }
+        else{
+            return 0;
+        }
     }
 
     public void setResults(List<Meal> results) {
