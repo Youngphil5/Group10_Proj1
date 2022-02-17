@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
 
         AppDb = AppDatabase.getInstance(this);
         userDAO = AppDb.getUserDao();
-        
+
         if(userDAO.getUser("admin") == null){// means there is no admin user
             //create admin user
             User admin = new User("admin",
@@ -40,6 +40,7 @@ public class LoginActivity extends AppCompatActivity {
 
             userDAO.insertUser(admin);
         }
+        
 
         binding.button2.setOnClickListener(v1 -> attemptLogin(v1));
     }
