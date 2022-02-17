@@ -14,6 +14,7 @@ public class User {
     private String location;
     private String username;
     private String password;
+    private boolean isAdmin;
     @PrimaryKey(autoGenerate = true)
     @NonNull
     private Integer uid;
@@ -60,6 +61,14 @@ public class User {
     public String getPassword() { return password; }
 
     public void setPassword(String password) { this.password = password; }
+
+    public boolean getIsAdmin() { // returns true or false
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
 
     @Override
     public boolean equals(Object o) {
